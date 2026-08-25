@@ -3,6 +3,14 @@
   --color-light: #ffe8cc;
   --color-medium: #ffa94d;
   --color-dark: #ff922b;
+
+  --color-text: #495057;
+  --color-heading: #343a40;
+  --color-green: #66a80f;
+  --color-red: #e03131;
+
+  --radius: 8px;
+  --shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
 }
 
 * {
@@ -18,54 +26,96 @@ html {
 }
 
 body {
-  height: 100vh;
-  color: #495057;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  min-height: 100vh;
+  color: var(--color-text);
+  background-color: #fff;
+  padding: 2rem 1.6rem;
 }
 
+/* ========================================
+   APP
+======================================== */
+
 .app {
-  min-height: 66vh;
+  width: 100%;
+  max-width: 110rem;
+  margin: 0 auto;
+
   display: grid;
-  grid-template-columns: 34rem 44rem;
-  column-gap: 4rem;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+
   align-items: start;
 }
 
+/* ========================================
+   BUTTON
+======================================== */
+
 .button {
+  min-height: 4.2rem;
+  padding: 0.8rem 1.4rem;
+
   background-color: var(--color-medium);
-  color: #343a40;
-  padding: 0.8rem 1.2rem;
+  color: var(--color-heading);
+
   border: none;
-  border-radius: 7px;
-  font-weight: bold;
+  border-radius: var(--radius);
+
+  font-family: inherit;
+  font-size: 1.4rem;
+  font-weight: 700;
+
   cursor: pointer;
-  transition: 0.3s;
+
+  transition:
+    background-color 0.2s,
+    transform 0.15s;
 }
 
 .button:hover {
   background-color: var(--color-dark);
 }
 
-.sidebar ul {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-  font-size: 1.4rem;
-  margin-bottom: 2rem;
+.button:active {
+  transform: scale(0.97);
 }
 
+/* ========================================
+   SIDEBAR
+======================================== */
+
+.sidebar {
+  width: 100%;
+}
+
+.sidebar ul {
+  list-style: none;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+
+  margin-bottom: 1.6rem;
+}
+
+/* ========================================
+   FRIEND
+======================================== */
+
 .sidebar li {
+  width: 100%;
+
   display: grid;
-  grid-template-columns: 4.8rem 1fr auto;
+  grid-template-columns: 4.8rem minmax(0, 1fr) auto;
+  column-gap: 1.2rem;
   align-items: center;
-  column-gap: 1.6rem;
 
   padding: 1.2rem;
-  border-radius: 7px;
-  transition: 0.5s;
+
+  border-radius: var(--radius);
+
+  transition: background-color 0.2s;
 }
 
 .selected,
@@ -74,97 +124,324 @@ body {
 }
 
 .sidebar li img {
+  width: 4.8rem;
+  height: 4.8rem;
+
+  object-fit: cover;
+
   border-radius: 50%;
-  width: 100%;
+
   grid-row: span 2;
 }
 
 .sidebar li h3 {
-  grid-row: 1;
   grid-column: 2;
+  grid-row: 1;
+
+  font-size: 1.6rem;
+  color: var(--color-heading);
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .sidebar li p {
-  grid-row: 2;
   grid-column: 2;
+  grid-row: 2;
+
+  font-size: 1.3rem;
+  line-height: 1.4;
+
+  overflow-wrap: anywhere;
 }
 
 .sidebar li .button {
-  grid-row: span 2;
   grid-column: 3;
+  grid-row: span 2;
+
+  white-space: nowrap;
 }
+
+/* Add Friend / Close button */
 
 .sidebar>.button {
-  float: right;
-  margin-right: 1.2rem;
+  display: block;
+  margin-left: auto;
 }
 
+/* ========================================
+   BALANCE COLORS
+======================================== */
+
 .green {
-  color: #66a80f;
+  color: var(--color-green);
 }
 
 .red {
-  color: #e03131;
+  color: var(--color-red);
 }
 
+/* ========================================
+   FORMS - COMMON
+======================================== */
+
 form {
-  font-size: 1.6rem;
+  width: 100%;
+
+  font-size: 1.5rem;
+
   display: grid;
   align-items: center;
   gap: 1.2rem;
 
   background-color: var(--color-lightest);
-  border-radius: 7px;
-}
+  border-radius: var(--radius);
 
-.form-add-friend {
-  grid-template-columns: 1fr 1.5fr;
-  margin-bottom: 1.6rem;
-  padding: 1.2rem;
-}
-
-.form-split-bill {
-  grid-template-columns: 1fr 12rem;
-  padding: 3.2rem 4rem;
+  box-shadow: var(--shadow);
 }
 
 label {
-  font-weight: 500;
-}
-
-label::first-letter {
-  display: inline-block;
-  margin-right: 4px;
-  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--color-heading);
 }
 
 input,
 select {
+  width: 100%;
+  min-height: 4.2rem;
+
   font-family: inherit;
   color: inherit;
   font-size: 1.5rem;
-  padding: 0.7rem;
-  text-align: center;
+
+  padding: 0.8rem 1rem;
+
+  background-color: #fff;
+
   border: 1px solid var(--color-light);
-  border-radius: 4px;
-  transition: 0.3s;
+  border-radius: 6px;
+
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
 }
 
 input:focus,
 select:focus {
   outline: none;
-  border: 1px solid var(--color-dark);
+
+  border-color: var(--color-dark);
+
+  box-shadow: 0 0 0 3px rgba(255, 146, 43, 0.15);
 }
 
-form .button {
-  margin-top: 0.6rem;
-  grid-column: 2;
+input:disabled {
+  background-color: #f8f9fa;
+  cursor: not-allowed;
 }
 
-form h2 {
-  grid-column: 1 / -1;
-  font-size: 2.2rem;
-  text-transform: uppercase;
-  letter-spacing: -0.5px;
+/* ========================================
+   ADD FRIEND FORM
+======================================== */
+
+.form-add-friend {
+  grid-template-columns: 1fr;
+  gap: 0.8rem;
+
   margin-bottom: 1.6rem;
+  padding: 1.6rem;
+}
+
+.form-add-friend label {
+  margin-top: 0.4rem;
+}
+
+.form-add-friend .button {
+  width: 100%;
+  margin-top: 0.6rem;
+}
+
+/* ========================================
+   SPLIT BILL FORM
+======================================== */
+
+.form-split-bill {
+  grid-template-columns: 1fr;
+  gap: 1.2rem;
+
+  padding: 2rem 1.6rem;
+}
+
+.form-split-bill h2 {
+  grid-column: 1;
+
+  font-size: 2rem;
+  line-height: 1.25;
+
+  text-transform: uppercase;
+  letter-spacing: -0.3px;
+
+  margin-bottom: 0.8rem;
+
+  color: var(--color-heading);
+}
+
+.form-split-bill .button {
+  width: 100%;
+  margin-top: 0.6rem;
+}
+
+/* ========================================
+   SMALL PHONES
+======================================== */
+
+@media (max-width: 380px) {
+  body {
+    padding: 1.2rem 1rem;
+  }
+
+  .sidebar li {
+    grid-template-columns: 4.2rem minmax(0, 1fr) auto;
+    column-gap: 0.8rem;
+
+    padding: 1rem;
+  }
+
+  .sidebar li img {
+    width: 4.2rem;
+    height: 4.2rem;
+  }
+
+  .sidebar li h3 {
+    font-size: 1.5rem;
+  }
+
+  .sidebar li p {
+    font-size: 1.2rem;
+  }
+
+  .button {
+    font-size: 1.3rem;
+    padding: 0.7rem 1rem;
+  }
+
+  .form-split-bill {
+    padding: 1.6rem 1.2rem;
+  }
+
+  .form-split-bill h2 {
+    font-size: 1.8rem;
+  }
+}
+
+/* ========================================
+   LARGE PHONES
+======================================== */
+
+@media (min-width: 480px) {
+  body {
+    padding: 2.4rem;
+  }
+
+  .app {
+    max-width: 55rem;
+    gap: 2.4rem;
+  }
+
+  .form-add-friend {
+    grid-template-columns: 1fr 1.5fr;
+    gap: 1rem 1.2rem;
+  }
+
+  .form-add-friend .button {
+    grid-column: 2;
+  }
+}
+
+/* ========================================
+   TABLET
+======================================== */
+
+@media (min-width: 768px) {
+  body {
+    padding: 4rem 3rem;
+  }
+
+  .app {
+    max-width: 70rem;
+    gap: 3rem;
+  }
+
+  .form-split-bill {
+    grid-template-columns: 1fr 14rem;
+    padding: 3rem;
+  }
+
+  .form-split-bill h2 {
+    grid-column: 1 / -1;
+    font-size: 2.2rem;
+  }
+
+  .form-split-bill .button {
+    grid-column: 2;
+  }
+}
+
+/* ========================================
+   DESKTOP
+======================================== */
+
+@media (min-width: 1024px) {
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 4rem;
+  }
+
+  .app {
+    max-width: 100rem;
+
+    grid-template-columns: minmax(30rem, 34rem) minmax(35rem, 44rem);
+
+    column-gap: clamp(2rem, 5vw, 5rem);
+  }
+
+  .form-add-friend {
+    padding: 1.4rem;
+  }
+
+  .form-split-bill {
+    padding: 3.2rem 4rem;
+  }
+}
+
+/* ========================================
+   LARGE DESKTOP
+======================================== */
+
+@media (min-width: 1200px) {
+  .app {
+    max-width: 110rem;
+
+    grid-template-columns: 34rem 44rem;
+
+    column-gap: 5rem;
+  }
+}
+
+/* ========================================
+   ACCESSIBILITY
+======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition: none !important;
+  }
 }
